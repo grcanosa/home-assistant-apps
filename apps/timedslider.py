@@ -39,7 +39,6 @@ class TimedSlider(appapi.AppDaemon)
         else:
             self.turn_on(self.args["binary")
             self.turn_on(self.args["onoff")
-            step_time
             self.run_in(self.change_slider_state,self.step_seconds,old_state = new)
 
     def change_slider_state(self,old_state):
