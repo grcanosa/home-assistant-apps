@@ -27,7 +27,7 @@ class TimedSlider(appapi.AppDaemon)
         self.valid = True
         if "slider" not in self.args or
             "sensor" not in self.args or
-            "boolean" not in self.args or
+            "binary" not in self.args or
             "onoff" not in self.args:
             self.valid = False
 
@@ -35,7 +35,9 @@ class TimedSlider(appapi.AppDaemon)
     def state_change(self,new):
         if int(new) == 0:
             self.turn_off(self.args["onoff"])
+            self.turn_off(self.args["binary"])
         else:
+            self.turn_on(self.args["binary")
             self.turn_on(self.args["onoff")
             step_time
             self.run_in(self.change_slider_state,self.step_seconds,old_state = new)
