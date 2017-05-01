@@ -31,7 +31,7 @@ class TimedSlider(appapi.AppDaemon):
 
 
     def state_change(self, entity, attribute, old, new, kwargs):
-        if int(new) == 0:
+        if float(new) == 0:
             self.turn_off(self.args["onoff"])
         else:
             self.turn_on(self.args["onoff"])
