@@ -33,7 +33,7 @@ class TimedSlider(appapi.AppDaemon):
         if int(new) == 0:
             self.turn_off(self.args["onoff"])
         else:
-            self.turn_on(self.args["onoff")
+            self.turn_on(self.args["onoff"])
             self.run_in(self.change_slider_state,self.step_seconds,old_state = new)
 
     def change_slider_state(self,old_state):
