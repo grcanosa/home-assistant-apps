@@ -12,7 +12,7 @@ class TimedSlider(appapi.AppDaemon):
             self.step = self.get_state(self.args["slider"], "step")
             self.max_val = self.get_state(self.args["slider"], "max")
             self.min_val = self.get_state(self.args["slider"], "min")
-            self.unit = self.get_state(self.args["slider"], "unit")
+            self.unit = self.get_state(self.args["slider"], "unit_of_measurement")
             self.step_multiplier = 1 # default is seconds
             if self.unit == "sec":
                 self.step_multiplier = 1;
