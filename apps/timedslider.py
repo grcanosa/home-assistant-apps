@@ -33,7 +33,7 @@ class TimedSlider(appapi.AppDaemon):
 
 
     def state_change(self, entity, attribute, old, new, kwargs):
-        self.notify("State has been changed to "+str(new),name="grcanosabot")
+        #self.notify("State has been changed to "+str(new),name="grcanosabot")
         if float(new) == 0:
             self.turn_off(self.args["onoff"])
         else:
@@ -46,4 +46,4 @@ class TimedSlider(appapi.AppDaemon):
     def change_slider_state(self,kwargs):
         new_state = float(kwargs["old_state"])-float(self.step)
         self.set_state(self.args["slider"],state=str(new_state));
-        self.notify("Changing state to "+str(new_state),name="grcanosabot")
+        #self.notify("Changing state to "+str(new_state),name="grcanosabot")
