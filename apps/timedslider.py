@@ -25,8 +25,7 @@ class TimedSlider(appapi.AppDaemon):
 
     def check_conf(self):
         self.valid = True
-        if "slider" not in self.args or
-            "onoff" not in self.args:
+        if "slider" not in self.args or "onoff" not in self.args:
             self.valid = False
 
 
