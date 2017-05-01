@@ -9,6 +9,7 @@ class TimedSlider(appapi.AppDaemon):
         self.check_conf()
         if self.valid:
             self.handles = []
+            self.run_in_h = []
             self.step = self.get_state(self.args["slider"], "step")
             self.max_val = self.get_state(self.args["slider"], "max")
             self.min_val = self.get_state(self.args["slider"], "min")
@@ -36,11 +37,12 @@ class TimedSlider(appapi.AppDaemon):
             self.turn_off(self.args["onoff"])
         else:
             self.turn_on(self.args["onoff"])
-            self.run_in(self.change_slider_state,self.step_seconds,old_state = new)
+            for h in self.run_in_h:
+                self.cancel_timer(h)
+            self.run_in_h = []
+            self.run_in_h.append(self.run_in(self.change_slider_state,self.step_seconds,old_state = new))
 
     def change_slider_state(self,kwargs):
         new_state = float(kwargs["old_state"])-float(self.step)
         self.set_state(self.args["slider"],state=str(new_state));
         self.notify("Changing state to "+str(new_state),name="grcanosabot")
-        self.notify("22 Changing state to "+str(new_state),name="notify.grcanosabot")
-        self.notify("33 Changing state to "+str(new_state),name="notify/grcanosabot")
