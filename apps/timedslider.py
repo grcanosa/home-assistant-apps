@@ -39,7 +39,7 @@ class TimedSlider(appapi.AppDaemon):
             self.run_in(self.change_slider_state,self.step_seconds,old_state = new)
 
     def change_slider_state(self,kwargs):
-        new_state = int(kwargs["old_state"])-int(self.step)
+        new_state = float(kwargs["old_state"])-float(self.step)
         self.set_state(self.args["slider"],state=str(new_state));
         self.notify("Changing state to "+str(new_state),name="grcanosabot")
         self.notify("22 Changing state to "+str(new_state),name="notify.grcanosabot")
