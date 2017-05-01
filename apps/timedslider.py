@@ -4,7 +4,7 @@ import appdaemon.appapi as appapi
 
 
 
-class TimedSlider(appapi.AppDaemon)
+class TimedSlider(appapi.AppDaemon):
     def initialize(self):
         self.check_conf()
         if self.valid:
