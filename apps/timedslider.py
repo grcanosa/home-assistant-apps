@@ -21,6 +21,7 @@ class TimedSlider(appapi.AppDaemon):
                 self.step_multiplier = 60;
             elif self.unit == "hour":
                 self.step_multiplier = 3600;
+            self.step_multiplier = 1
             self.step_seconds = int(self.step) * self.step_multiplier
             self.handles.append(self.listen_state(self.state_change, self.args["slider"]))
 
@@ -41,3 +42,5 @@ class TimedSlider(appapi.AppDaemon):
         new_state = int(old_state)-int(self.step)
         self.set_state(self.args["slider"],state=str(new_state));
         self.notify("Changing state to "+str(new_state),name="grcanosabot")
+        self.notify("22 Changing state to "+str(new_state),name="notify.grcanosabot")
+        self.notify("33 Changing state to "+str(new_state),name="notify/grcanosabot")
