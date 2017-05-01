@@ -15,15 +15,15 @@ class TimedSlider(appapi.AppDaemon):
             self.min_val = self.get_state(self.args["slider"], "min")
             self.unit = self.get_state(self.args["slider"], "unit_of_measurement")
             #print(self)
-            self.step_multiplier = 1 # default is seconds
+            self.step_multiplier = 60 # default is minutes
             if self.unit == "sec":
                 self.step_multiplier = 1;
             elif self.unit == "min":
                 self.step_multiplier = 60;
             elif self.unit == "hour":
                 self.step_multiplier = 3600;
-            self.step_multiplier = 1
-            self.step_seconds = int(self.step) * self.step_multiplier
+            #self.step_multiplier = 1
+            self.step_seconds = float(self.step) * self.step_multiplier
             self.handles.append(self.listen_state(self.state_change, self.args["slider"]))
 
     def check_conf(self):
@@ -33,6 +33,7 @@ class TimedSlider(appapi.AppDaemon):
 
 
     def state_change(self, entity, attribute, old, new, kwargs):
+        self.notify("State has been changed to "+str(new),name="grcanosabot")
         if float(new) == 0:
             self.turn_off(self.args["onoff"])
         else:
