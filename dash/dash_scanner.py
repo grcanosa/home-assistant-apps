@@ -8,6 +8,7 @@ import time
 class DashScanner():
     def __init__(self):
         self.last_check_time = time.time()
+        self.MAC_dash_fairy = "ac:63:be:d4:7e:3d"
     def notify_hass(self):
         tnow = time.time()
         print("Dash probe received, last time was "+str(tnow-self.last_check_time)+" seconds ago")
@@ -16,7 +17,10 @@ class DashScanner():
     def arp_scan(self,pkt):
         if pkt.haslayer(ARP):
             if pkt[ARP].op == 1: #who-has (request)
-                if pkt[ARP].hwsrc == "c4:a3:66:d3:5b:1e":
+                #print(pkt[ARP].hwsrc)
+                if pkt[ARP].hwsrc == self.MAC_dash_fairy:
+                    #print(pkt[ARP])
+                    pkt.show()
                     #print("Probe from DASH")
                     self.notify_hass()
 
