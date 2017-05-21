@@ -8,7 +8,7 @@ import time
 class DashScanner():
     def __init__(self):
         self.last_check_time = time.time()
-    def notify_hass():
+    def notify_hass(self):
         tnow = time.time()
         print("Dash probe received, last time was "+str(tnow-self.last_check_time)+" seconds ago")
         self.last_check_time = tnow;
@@ -27,4 +27,4 @@ class DashScanner():
 
 if __name__ == "__main__":
   dS = DashScanner()
-  sniff(prn=ds.arp_scan,filter="arp",store=0,count=0)
+  sniff(prn=dS.arp_scan,filter="arp",store=0,count=0)
