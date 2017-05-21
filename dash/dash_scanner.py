@@ -25,6 +25,6 @@ class DashScanner():
 
 
 
-if name == "__main__":
+if __name__ == "__main__":
   dS = DashScanner()
   sniff(prn=ds.arp_scan,filter="arp",store=0,count=0)
