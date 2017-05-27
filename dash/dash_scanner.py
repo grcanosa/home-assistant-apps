@@ -12,15 +12,15 @@ import sys
 
 
 
-class DashScanner(filename=None,password=""):
-    def __init__(self):
+class DashScanner():
+    def __init__(self,filename=None,password=""):
         self.last_check_time = time.time()
         self.url='http://192.168.1.98:8123/api/services/notify/grcanosabot'
         self.headers={'x-ha-access': password, 'content-type': 'application/json'}
-        self.data={'title': 'Fairy te dice:', 'message': 'message'}
-        self.load_from_file(filename)
+        self.data={'title': 'Pensando en ti digo:', 'message': 'message'}
         self.sentences = ["Te quiero"]
-
+        self.load_from_file(filename)
+        
     def load_from_file(self,filename):
         with open(filename) as f:
             for l in f:
@@ -40,12 +40,14 @@ class DashScanner(filename=None,password=""):
                     #print("Probe from DASH")
                     tnow = time.time()
                     #print("Dash probe received, last time was "+str(tnow-self.last_check_time)+" seconds ago")
-                    if tnow-self.last_check_time > 9:
+                    #print(pkt[ARP])
+                    if tnow-self.last_check_time > 15:
                         self.notify_hass();
-                    self.last_check_time = tnow;
+                        self.last_check_time = tnow;
 
 
 
 if __name__ == "__main__":
+  print(sys.argv)
   dS = DashScanner("piropos.txt",sys.argv[1])
   sniff(prn=dS.arp_scan,filter="arp",store=0,count=0)
