@@ -22,7 +22,7 @@ class DashScanner():
         self.sentences = ["Te quiero"]
         self.load_from_file(filename)
         requests.post(self.urlGR,headers=self.headers,json=self.data)
-        
+
     def load_from_file(self,filename):
         with open(filename) as f:
             for l in f:
@@ -38,7 +38,7 @@ class DashScanner():
     def arp_scan(self,pkt):
         if pkt.haslayer(ARP):
             if pkt[ARP].op == 1: #who-has (request)
-                if pkt[ARP].hwsrc == "c4:a3:66:d3:5b:1e":
+                if pkt[ARP].hwsrc == "ac:63:be:d4:7e:3d":
                     #print("Probe from DASH")
                     tnow = time.time()
                     #print("Dash probe received, last time was "+str(tnow-self.last_check_time)+" seconds ago")
