@@ -18,7 +18,7 @@ start)
     . $path/pass_info.sh
     #echo "Creating folder in $path/../data/log"
     #mkdir -p $path/../data/log
-	  $path/dash_scanner.py $HOMEASSISTANTPASS &
+    $path/dash_scanner.py $HOMEASSISTANTPASS $path/piropos.txt &
     #echo $! > /tmp/telegrambots.pid
     ;;
 restart)

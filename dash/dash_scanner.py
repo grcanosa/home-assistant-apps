@@ -15,11 +15,13 @@ import sys
 class DashScanner():
     def __init__(self,filename=None,password=""):
         self.last_check_time = time.time()
-        self.url='http://192.168.1.98:8123/api/services/notify/grcanosabot'
+        self.urlGR='http://192.168.1.98:8123/api/services/notify/bot_to_grcanosa'
+        self.urlSA='http://192.168.1.98:8123/api/services/notify/bot_to_sara'
         self.headers={'x-ha-access': password, 'content-type': 'application/json'}
-        self.data={'title': 'Pensando en ti digo:', 'message': 'message'}
+        self.data={'title': '<FAIRY>', 'message': ' Starting...'}
         self.sentences = ["Te quiero"]
         self.load_from_file(filename)
+        requests.post(self.urlGR,headers=self.headers,json=self.data)
         
     def load_from_file(self,filename):
         with open(filename) as f:
@@ -30,7 +32,7 @@ class DashScanner():
 
     def notify_hass(self):
         self.data["message"] = random.choice(self.sentences)
-        requests.post(self.url,headers=self.headers,json=self.data)
+        requests.post(self.urlGR,headers=self.headers,json=self.data)
 
 
     def arp_scan(self,pkt):
@@ -48,6 +50,6 @@ class DashScanner():
 
 
 if __name__ == "__main__":
-  print(sys.argv)
-  dS = DashScanner("piropos.txt",sys.argv[1])
+  #print(sys.argv)
+  dS = DashScanner(sys.argv[2],sys.argv[1])
   sniff(prn=dS.arp_scan,filter="arp",store=0,count=0)
