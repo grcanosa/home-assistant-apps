@@ -22,7 +22,17 @@ class DashScanner():
         self.sentences = [":)"]
         self.load_from_file(filename)
         self.mac = mac;
-        requests.post(self.urlGR,headers=self.headers,json=self.data)
+        req_ok = False
+        startup_attemps = 1;
+        while req_ok == False:
+            time.sleep(1)
+            try:
+                self.data["message"] = "Starting ... "+str(startup_attemps); 
+                requests.post(self.urlGR,headers=self.headers,json=self.data)
+                req_ok = True;
+            except requests.exceptions.RequestException as e:
+                startup_attemps+= 1
+                
 
     def load_from_file(self,filename):
         with open(filename) as f:
