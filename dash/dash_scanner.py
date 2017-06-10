@@ -13,14 +13,15 @@ import sys
 
 
 class DashScanner():
-    def __init__(self,filename=None,password=""):
+    def __init__(self,filename=None,password="",ip="http://localhost:8123",mac=""):
         self.last_check_time = time.time()
-        self.urlGR='http://192.168.1.100:8123/api/services/notify/bot_to_grcanosa'
-        self.urlSA='http://192.168.1.100:8123/api/services/notify/bot_to_sara'
+        self.urlGR=ip+'/api/services/notify/bot_to_grcanosa'
+        self.urlSA=ip+'/api/services/notify/bot_to_sara'
         self.headers={'x-ha-access': password, 'content-type': 'application/json'}
         self.data={'title': '<FAIRY>', 'message': ' Starting...'}
-        self.sentences = ["Te quiero"]
+        self.sentences = [":)"]
         self.load_from_file(filename)
+        self.mac = mac;
         requests.post(self.urlGR,headers=self.headers,json=self.data)
 
     def load_from_file(self,filename):
@@ -38,7 +39,7 @@ class DashScanner():
     def arp_scan(self,pkt):
         if pkt.haslayer(ARP):
             if pkt[ARP].op == 1: #who-has (request)
-                if pkt[ARP].hwsrc == "ac:63:be:d4:7e:3d":
+                if pkt[ARP].hwsrc == self.mac:
                     #print("Probe from DASH")
                     tnow = time.time()
                     #print("Dash probe received, last time was "+str(tnow-self.last_check_time)+" seconds ago")
@@ -51,5 +52,5 @@ class DashScanner():
 
 if __name__ == "__main__":
   #print(sys.argv)
-  dS = DashScanner(sys.argv[2],sys.argv[1])
+  dS = DashScanner(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])
   sniff(prn=dS.arp_scan,filter="arp",store=0,count=0)
