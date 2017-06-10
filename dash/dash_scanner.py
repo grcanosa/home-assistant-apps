@@ -34,6 +34,7 @@ class DashScanner():
     def notify_hass(self):
         self.data["message"] = random.choice(self.sentences)
         requests.post(self.urlGR,headers=self.headers,json=self.data)
+        requests.post(self.urlSA,headers=self.headers,json=self.data)
 
 
     def arp_scan(self,pkt):
