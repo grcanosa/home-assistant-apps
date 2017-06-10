@@ -15,8 +15,8 @@ import sys
 class DashScanner():
     def __init__(self,filename=None,password=""):
         self.last_check_time = time.time()
-        self.urlGR='http://192.168.1.98:8123/api/services/notify/bot_to_grcanosa'
-        self.urlSA='http://192.168.1.98:8123/api/services/notify/bot_to_sara'
+        self.urlGR='http://192.168.1.100:8123/api/services/notify/bot_to_grcanosa'
+        self.urlSA='http://192.168.1.100:8123/api/services/notify/bot_to_sara'
         self.headers={'x-ha-access': password, 'content-type': 'application/json'}
         self.data={'title': '<FAIRY>', 'message': ' Starting...'}
         self.sentences = ["Te quiero"]
