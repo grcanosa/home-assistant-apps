@@ -18,7 +18,7 @@ class DashScanner():
         self.urlGR=ip+'/api/services/notify/bot_to_grcanosa'
         self.urlSA=ip+'/api/services/notify/bot_to_sara'
         self.headers={'x-ha-access': password, 'content-type': 'application/json'}
-        self.data={'title': '<FAIRY>', 'message': ' Starting...'}
+        self.data={'title': '<LOVEBOT>', 'message': ' Starting...'}
         self.sentences = [":)"]
         self.load_from_file(filename)
         self.mac = mac;
@@ -49,7 +49,9 @@ class DashScanner():
 
     def arp_scan(self,pkt):
         if pkt.haslayer(ARP):
+            print("Has layer ARP")
             if pkt[ARP].op == 1: #who-has (request)
+                print("WHO HAS "+pkt[ARP].hwsrc+"my mac "+self.mac+" equal "+str(pkt[ARP].hwsrc == self.mac))
                 if pkt[ARP].hwsrc == self.mac:
                     #print("Probe from DASH")
                     tnow = time.time()
@@ -58,6 +60,8 @@ class DashScanner():
                     if tnow-self.last_check_time > 15:
                         self.notify_hass();
                         self.last_check_time = tnow;
+                    else:
+                        print("Too short time, repeated ARP")
 
 
 
