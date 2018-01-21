@@ -49,9 +49,9 @@ class DashScanner():
 
     def arp_scan(self,pkt):
         if pkt.haslayer(ARP):
-            print("Has layer ARP")
+            #print("Has layer ARP")
             if pkt[ARP].op == 1: #who-has (request)
-                print("WHO HAS "+pkt[ARP].hwsrc+"my mac "+self.mac+" equal "+str(pkt[ARP].hwsrc == self.mac))
+                #print("WHO HAS "+pkt[ARP].hwsrc+"my mac "+self.mac+" equal "+str(pkt[ARP].hwsrc == self.mac))
                 if pkt[ARP].hwsrc == self.mac:
                     #print("Probe from DASH")
                     tnow = time.time()
