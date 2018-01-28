@@ -68,4 +68,5 @@ class DashScanner():
 if __name__ == "__main__":
   #print(sys.argv)
   dS = DashScanner(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])
+  time.sleep(60)
   sniff(prn=dS.arp_scan,filter="arp",store=0,count=0)
