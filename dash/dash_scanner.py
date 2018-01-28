@@ -40,7 +40,10 @@ class DashScanner():
                 l = l.strip();
                 self.sentences.append(l)
 
-
+    def msg_admin(self, msg):
+        self.data["message"] = msg
+        requests.post(self.urlGR,headers=self.headers,json=self.data)
+        
     def notify_hass(self):
         self.data["message"] = random.choice(self.sentences)
         requests.post(self.urlGR,headers=self.headers,json=self.data)
@@ -69,4 +72,5 @@ if __name__ == "__main__":
   #print(sys.argv)
   dS = DashScanner(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])
   time.sleep(60)
+  dS.msg_admin("Starting after 60s")
   sniff(prn=dS.arp_scan,filter="arp",store=0,count=0)
