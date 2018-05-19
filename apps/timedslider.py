@@ -10,10 +10,10 @@ class TimedSlider(hass.Hass):
         if self.valid:
             self.handles = []
             self.run_in_h = []
-            self.step = self.get_state(self.args["slider"], "step")
-            self.max_val = self.get_state(self.args["slider"], "max")
-            self.min_val = self.get_state(self.args["slider"], "min")
-            self.unit = self.get_state(self.args["slider"], "unit_of_measurement")
+            self.step = self.get_state(self.args["slider"],attribute= "step")
+            self.max_val = self.get_state(self.args["slider"],attribute= "max")
+            self.min_val = self.get_state(self.args["slider"], attribute="min")
+            self.unit = self.get_state(self.args["slider"],attribute= "unit_of_measurement")
             #print(self)
             self.step_multiplier = 60 # default is minutes
             if self.unit == "sec":
