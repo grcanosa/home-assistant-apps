@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 import appdaemon.appapi as appapi
+import appdaemon.plugins.hass.hassapi as hass
 
 
-
-class TimedSlider(appapi.AppDaemon):
+class TimedSlider(hass.Hass):
     def initialize(self):
         self.check_conf()
         if self.valid:
