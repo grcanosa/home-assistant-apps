@@ -1,0 +1,5 @@
+termo_timed:
+  class: TimedSlider
+  module: timedslider
+  onoff: switch.switchone_switch
+  slider: input_number.slider_termo_time
