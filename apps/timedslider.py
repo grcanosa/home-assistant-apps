@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import appdaemon.appapi as appapi
-
+import datetime
 
 
 class TimedSlider(appapi.AppDaemon):
@@ -25,6 +25,15 @@ class TimedSlider(appapi.AppDaemon):
             #self.step_multiplier = 1
             self.step_seconds = float(self.step) * self.step_multiplier
             self.handles.append(self.listen_state(self.state_change, self.args["slider"]))
+            #Now we add a zero check handler every 5 minutes
+            self.run_every(self.check_5_min,datetime.time(0,0,0),5*60)
+
+    def check_5_min(self):
+        try:
+            if float(self.get_state(self.args["slider"],"state")) == 0.0:
+                self.turn_off(self.args["onoff"])
+        except:
+            pass
 
     def check_conf(self):
         self.valid = True
