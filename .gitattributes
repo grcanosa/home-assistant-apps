@@ -1,1 +1,3 @@
 dash/pass_info.sh  filter=crypt diff=crypt
+conf/appdaemon.cfg  filter=crypt diff=crypt
+conf/appdaemon.yaml  filter=crypt diff=crypt
